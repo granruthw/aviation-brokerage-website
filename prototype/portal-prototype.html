@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[BRAND] Client Portal — Prototype (demo data)</title>
+<style>
+  :root {
+    --navy:#101b2d; --navy-2:#16233a; --paper:#f7f6f2; --card:#ffffff;
+    --ink:#1a1a1a; --ink-2:#4c5666; --muted:#898781;
+    --accent:#2a78d6; --accent-deep:#1c5cab; --gold:#c8a24a;
+    --line:rgba(16,27,45,.12); --good:#0ca30c; --good-text:#006300;
+    --track:#e8e6df;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--paper); color:var(--ink); line-height:1.55; }
+  .demo-banner { background:var(--gold); color:#2a2003; text-align:center; font-size:12.5px; font-weight:650; padding:6px 12px; }
+  header { background:var(--navy); color:#fff; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 20px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; padding:14px 0; }
+  .logo { font-weight:700; font-size:16px; } .logo span{ color:var(--gold); }
+  .user { font-size:13px; color:rgba(255,255,255,.8); }
+  nav.tabs { display:flex; gap:4px; padding-bottom:0; }
+  nav.tabs button {
+    background:transparent; border:none; color:rgba(255,255,255,.75); font:inherit; font-size:14px;
+    font-weight:600; padding:10px 16px; cursor:pointer; border-radius:8px 8px 0 0;
+  }
+  nav.tabs button[aria-selected="true"] { background:var(--paper); color:var(--navy); }
+  main { padding:26px 0 60px; }
+  .screen { display:none; } .screen.active { display:block; }
+  h1 { font-size:21px; margin-bottom:4px; }
+  .sub { color:var(--ink-2); font-size:14px; margin-bottom:22px; }
+  .grid { display:grid; gap:16px; grid-template-columns:2fr 1fr; align-items:start; }
+  @media (max-width:760px){ .grid{ grid-template-columns:1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px; }
+  .card h2 { font-size:15px; margin-bottom:12px; }
+  .kv { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--track); font-size:14px; }
+  .kv:last-child { border-bottom:none; }
+  .kv .k { color:var(--ink-2); } .kv .v { font-weight:600; text-align:right; }
+  .flag { background:#fbf7ee; border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:12px 14px; font-size:13px; color:var(--ink-2); margin-top:14px; }
+  .flag strong{ color:var(--ink); }
+  .big { font-size:34px; font-weight:750; line-height:1.1; }
+  .big small { display:block; font-size:12.5px; font-weight:600; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin-top:4px; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; border:none; font:inherit; font-weight:650; font-size:13.5px; padding:10px 16px; border-radius:8px; cursor:pointer; text-decoration:none; }
+  .btn:hover{ background:var(--accent-deep); }
+  .btn.ghost { background:transparent; color:var(--accent-deep); border:1px solid var(--line); }
+  .btn + .btn { margin-left:8px; }
+  /* timeline */
+  .tl { list-style:none; margin-top:6px; }
+  .tl li { position:relative; padding:0 0 22px 34px; }
+  .tl li::before {
+    content:""; position:absolute; left:9px; top:22px; bottom:-2px; width:2px; background:var(--track);
+  }
+  .tl li:last-child::before { display:none; }
+  .tl .dot {
+    position:absolute; left:0; top:2px; width:20px; height:20px; border-radius:50%;
+    background:var(--card); border:2px solid var(--track); display:flex; align-items:center; justify-content:center;
+    font-size:11px; color:#fff;
+  }
+  .tl li.done .dot { background:var(--good); border-color:var(--good); }
+  .tl li.done .dot::after { content:"✓"; }
+  .tl li.now .dot { background:var(--accent); border-color:var(--accent); box-shadow:0 0 0 4px rgba(42,120,214,.15); }
+  .tl h3 { font-size:14px; }
+  .tl li.future h3 { color:var(--muted); font-weight:600; }
+  .tl p { font-size:12.5px; color:var(--ink-2); margin-top:2px; max-width:52ch; }
+  .tl time { font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .pill { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:999px; }
+  .pill.inmarket { background:#e7effb; color:var(--accent-deep); }
+  .pill.bound { background:#e6f4e6; color:var(--good-text); }
+  /* documents */
+  table.docs { width:100%; border-collapse:collapse; font-size:14px; }
+  table.docs td { padding:10px 6px; border-bottom:1px solid var(--track); }
+  table.docs tr:last-child td { border-bottom:none; }
+  table.docs .dname { font-weight:600; }
+  table.docs .dmeta { color:var(--muted); font-size:12px; }
+  table.docs a { color:var(--accent-deep); font-weight:600; font-size:13px; text-decoration:none; }
+  /* requests */
+  .req { display:grid; gap:12px; grid-template-columns:repeat(2,1fr); }
+  @media (max-width:640px){ .req{ grid-template-columns:1fr; } }
+  .req button {
+    text-align:left; background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:18px; font:inherit; cursor:pointer;
+  }
+  .req button:hover { border-color:var(--accent); }
+  .req h3 { font-size:14.5px; margin-bottom:4px; }
+  .req p { font-size:12.5px; color:var(--ink-2); }
+  .claimcard { background:var(--navy); color:#fff; border-radius:12px; padding:22px; margin-top:16px; }
+  .claimcard h2 { font-size:15px; margin-bottom:10px; color:#fff; }
+  .claimcard ol { margin-left:18px; font-size:13.5px; }
+  .claimcard li { margin-bottom:8px; color:rgba(255,255,255,.85); }
+  .claimcard strong { color:var(--gold); }
+  .note { font-size:12px; color:var(--muted); margin-top:14px; }
+  dialog { border:none; border-radius:14px; padding:26px; max-width:440px; width:92%; box-shadow:0 24px 60px rgba(16,27,45,.25); }
+  dialog::backdrop { background:rgba(16,27,45,.45); }
+  dialog h2{ font-size:16px; margin-bottom:6px; } dialog p{ font-size:13.5px; color:var(--ink-2); margin-bottom:16px; }
+  dialog label{ display:block; font-size:12.5px; font-weight:650; margin:12px 0 4px; }
+  dialog input, dialog select, dialog textarea { width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px; font:inherit; font-size:14px; }
+  .ok { color:var(--good-text); font-weight:650; font-size:13.5px; margin-top:12px; display:none; }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">PROTOTYPE · demo data only · no real policy, client, or carrier information</div>
+
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="logo">[BRAND]<span> ✈</span> <span style="font-weight:400;font-size:13px;color:rgba(255,255,255,.6)">Client Portal</span></div>
+      <div class="user">W. Example · N123AB · <a href="#" style="color:var(--gold)">Sign out</a></div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true"  data-s="coverage">My coverage</button>
+      <button role="tab" aria-selected="false" data-s="activity">Activity</button>
+      <button role="tab" aria-selected="false" data-s="documents">Documents</button>
+      <button role="tab" aria-selected="false" data-s="requests">Requests</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ COVERAGE ============ -->
+  <section class="screen active" id="s-coverage">
+    <h1>N123AB · Cirrus SR22 G3</h1>
+    <p class="sub">Policy <strong>AVN-2026-0417</strong> · <span class="pill bound">In force</span> · Old Republic Aerospace via wholesale partner</p>
+    <div class="grid">
+      <div class="card">
+        <h2>Coverage, in plain language</h2>
+        <div class="kv"><span class="k">Hull (agreed value)</span><span class="v">$485,000 · $0 not-in-motion / $2,500 in-motion deductible</span></div>
+        <div class="kv"><span class="k">Liability</span><span class="v">$1,000,000 each occurrence · $100,000 per passenger</span></div>
+        <div class="kv"><span class="k">Medical</span><span class="v">$5,000 per person</span></div>
+        <div class="kv"><span class="k">Approved pilots</span><span class="v">Named insured · Open pilot: 500TT / 25 in type</span></div>
+        <div class="kv"><span class="k">Territory</span><span class="v">US, Canada, Bahamas, Mexico</span></div>
+        <div class="kv"><span class="k">Lienholder</span><span class="v">First Example Bank — breach of warranty endorsed</span></div>
+        <div class="flag"><strong>Two conditions to watch:</strong> recurrent training due by <strong>Mar 15, 2027</strong> (calendar invite sent), and hull coverage assumes hangared at KBDR — tell us before any base change.</div>
+        <p class="note">You chose $1M/$100K sublimits after reviewing smooth limits — your signed limits-offered record is in Documents. Want to revisit at renewal? One click in Requests.</p>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="big">213<small>days to renewal · Mar 18, 2027</small></div>
+          <p class="note" style="margin-top:10px;">Your renewal package — with a plain-English diff of any coverage changes — arrives by <strong>Dec 18, 2026</strong>. That's the promise.</p>
+        </div>
+        <div class="card">
+          <h2>Your broker</h2>
+          <p style="font-size:13.5px;">William · SR22 owner, CPL/IR<br><span class="dmeta">[FOUNDER-EMAIL] · [PHONE]</span></p>
+          <p class="note">Premium is paid directly to the carrier — [BRAND] never handles your money.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACTIVITY ============ -->
+  <section class="screen" id="s-activity">
+    <h1>Activity</h1>
+    <p class="sub">Midterm change in progress · <span class="pill inmarket">With carrier</span> · You'll hear from us at every step — this page just keeps the receipts.</p>
+    <div class="card">
+      <h2>Add named pilot — J. Example (spouse)</h2>
+      <ul class="tl">
+        <li class="done"><span class="dot"></span><h3>Request received</h3><p>Guided form completed; pilot history attached.</p><time>Aug 14, 2:12 pm</time></li>
+        <li class="done"><span class="dot"></span><h3>Reviewed &amp; signed by William</h3><p>Pilot-clause impact checked — open-pilot warranty not met (180 TT), so a named-pilot endorsement is the right path.</p><time>Aug 14, 4:40 pm</time></li>
+        <li class="done"><span class="dot"></span><h3>Submitted to carrier</h3><p>Endorsement request to Old Republic via our wholesale partner.</p><time>Aug 15, 9:03 am</time></li>
+        <li class="now"><span class="dot"></span><h3>With carrier — expected by Aug 20</h3><p>We chase at 48 hours so you don't have to. Next update no later than Aug 19.</p><time>now</time></li>
+        <li class="future"><span class="dot"></span><h3>Endorsement checked &amp; delivered</h3><p>We diff the endorsement against what was requested before it reaches you.</p></li>
+      </ul>
+    </div>
+    <p class="note">Every quote and renewal shows here with the same timeline: Intake → Packet → In market → Quotes in → Proposal → Bound → Delivered.</p>
+  </section>
+
+  <!-- ============ DOCUMENTS ============ -->
+  <section class="screen" id="s-documents">
+    <h1>Documents</h1>
+    <p class="sub">Everything we've exchanged, named consistently, never buried in an email thread.</p>
+    <div class="card">
+      <table class="docs">
+        <tr><td><div class="dname">Policy — AVN-2026-0417.pdf</div><div class="dmeta">Issued Mar 18, 2026 · checked line-by-line against proposal Mar 20</div></td><td style="text-align:right"><a href="#" onclick="return demo()">View</a></td></tr>
+        <tr><td><div class="dname">Proposal &amp; limits-offered record (signed).pdf</div><div class="dmeta">Your signed record of every limit offered and what you selected</div></td><td style="text-align:right"><a href="#" onclick="return demo()">View</a></td></tr>
+        <tr><td><div class="dname">Certificate — First Example Bank.pdf</div><div class="dmeta">Lienholder certificate · issued in 4 business hours</div></td><td style="text-align:right"><a href="#" onclick="return demo()">View</a></td></tr>
+        <tr><td><div class="dname">Binder — Mar 18, 2026.pdf</div><div class="dmeta">Superseded by issued policy</div></td><td style="text-align:right"><a href="#" onclick="return demo()">View</a></td></tr>
+        <tr><td><div class="dname">Flight Data Consent</div><div class="dmeta">Not on file — optional future program, nothing shared without your written direction</div></td><td style="text-align:right"><span class="dmeta">—</span></td></tr>
+      </table>
+      <p style="margin-top:16px;"><button class="btn" onclick="openDlg('cert')">Request a certificate</button><span class="note" style="margin-left:10px;">1-business-day turnaround</span></p>
+    </div>
+  </section>
+
+  <!-- ============ REQUESTS ============ -->
+  <section class="screen" id="s-requests">
+    <h1>Requests</h1>
+    <p class="sub">Short guided forms — no phone tag required (but William answers the phone, too).</p>
+    <div class="req">
+      <button onclick="openDlg('change')"><h3>Midterm change</h3><p>Hull value, lienholder, pilot added, hangar or base change. Anything touching pilot clauses or hull value gets William's personal review.</p></button>
+      <button onclick="openDlg('cert')"><h3>Certificate of insurance</h3><p>For a lienholder, airport, or event. One business day.</p></button>
+      <button onclick="openDlg('renew')"><h3>Revisit my coverage</h3><p>Limits, smooth vs sublimits, agreed value — schedule 15 minutes with William before renewal.</p></button>
+      <button onclick="openDlg('profile')"><h3>Profile &amp; consents</h3><p>Contact details, e-delivery preferences, communication settings.</p></button>
+    </div>
+    <div class="claimcard">
+      <h2>✈ If you've had an incident</h2>
+      <ol>
+        <li><strong>Everyone safe first.</strong> Then preserve the aircraft as-is if you safely can.</li>
+        <li>Call the carrier claims line: <strong>1-800-000-0000</strong> (Old Republic, policy AVN-2026-0417).</li>
+        <li>Call us next — <strong>[PHONE]</strong>. We advocate on process from the first call. Stick to facts; no fault statements to anyone.</li>
+        <li>NTSB 830 may require immediate notification for some events — our claims guide walks you through it.</li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ dialogs ============ -->
+<dialog id="dlg">
+  <h2 id="dlg-title">Request</h2>
+  <p id="dlg-sub">We'll confirm receipt immediately and give you a due date.</p>
+  <form method="dialog" id="dlg-form">
+    <div id="dlg-fields"></div>
+    <p style="margin-top:18px;"><button class="btn" onclick="return submitDemo(event)">Submit</button> <button class="btn ghost" value="cancel">Cancel</button></p>
+    <p class="ok" id="dlg-ok">✓ Received (demo). In production this creates a tracked ticket with an SLA clock and a confirmation email.</p>
+  </form>
+</dialog>
+
+<script>
+  // Prototype only. In-memory; no storage of any kind.
+  const tabs = document.querySelectorAll('nav.tabs button');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.setAttribute('aria-selected', x===t));
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('s-'+t.dataset.s).classList.add('active');
+  }));
+  const DLG = {
+    change: { t:'Midterm change', f:['What is changing?|select|Hull value,Add/remove pilot,Lienholder,Hangar or base airport,Other','Details|textarea'] },
+    cert:   { t:'Certificate of insurance', f:['Certificate holder name|input','Holder address|input','Needed by|input'] },
+    renew:  { t:'Revisit my coverage', f:['What would you like to discuss?|select|Liability limits (smooth vs sublimits),Agreed hull value,Deductibles,Something else','Best times for 15 min with William|input'] },
+    profile:{ t:'Profile & consents', f:['Email|input','Phone|input','E-delivery of policy documents|select|Keep on,Turn off (paper mail)'] },
+  };
+  function openDlg(k){
+    const d = DLG[k];
+    document.getElementById('dlg-title').textContent = d.t;
+    document.getElementById('dlg-ok').style.display='none';
+    document.getElementById('dlg-fields').innerHTML = d.f.map(row => {
+      const [label,kind,opts] = row.split('|');
+      if(kind==='select') return `<label>${label}</label><select>${opts.split(',').map(o=>`<option>${o}</option>`).join('')}</select>`;
+      if(kind==='textarea') return `<label>${label}</label><textarea rows="3"></textarea>`;
+      return `<label>${label}</label><input type="text">`;
+    }).join('');
+    document.getElementById('dlg').showModal();
+  }
+  function submitDemo(e){ e.preventDefault(); document.getElementById('dlg-ok').style.display='block'; return false; }
+  function demo(){ alert('Prototype — document viewing is disabled in the demo.'); return false; }
+</script>
+</body>
+</html>
