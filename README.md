@@ -1,17 +1,17 @@
-# [BRAND] — Marketing Site
+# Penfield Aviation Insurance — Marketing Site
 
 The marketing website for an AI-native aviation insurance brokerage serving private and business aviation. **Staged dark: this site must not be published until the launch gates below are cleared.**
 
 ## Status
 
 - **Copy:** v7 (plain-language pass, 2026-08-17) — final register: intelligent-pilot voice, short declaratives, no insurance jargon. Version history lives in Drive (`Venture Desks (Claude)/ADS-B Brokerage — Business in a Box/website/`, v2–v7) and in this repo's git history going forward.
-- **Brand:** `[BRAND]` is a placeholder everywhere — the name is not yet chosen. When it is: find-replace `[BRAND]`, `[FOUNDER-EMAIL]`, `[PHONE]`, `[PRIVACY-POLICY-URL]`, `[FORM-ENDPOINT]`, `[CT-LICENSE-#]`.
+- **Brand:** Penfield Aviation Insurance was selected for marketing/product/site use on 2026-08-23. Legal-facing and third-party artifacts outside this repo keep `[BRAND]` until counsel clears the name. Remaining launch placeholders: `[FOUNDER-EMAIL]`, `[PHONE]`, `[PRIVACY-POLICY-URL]`, `[FORM-ENDPOINT]`, `[CT-LICENSE-#]`.
 - **Compliance posture:** pre-license. No quote CTA, no premium language, no coverage advice. Waitlist capture only, with state dropdown (state-gating built in).
 
 ## Launch gates — do not deploy until ALL are cleared
 
 1. **Gate Zero** — employment/IP counsel review complete (precedes anything public).
-2. **Brand chosen** and placeholders replaced.
+2. **Brand chosen** and site placeholders replaced.
 3. **Ad-review checklist** passed (`compliance/ad-review-checklist` in the Business-in-a-Box) and counsel eyes on marketing claims.
 4. **`[FORM-ENDPOINT]`** connected to the waitlist backend (until then the form runs in demo mode).
 

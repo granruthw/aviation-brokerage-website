@@ -1,4 +1,4 @@
-# SEO plan — [DATABRAND]/[BRAND] website
+# SEO plan — [DATABRAND]/Penfield Aviation Insurance website
 
 **Posture:** content pages index NOW under [DATABRAND] with no quote CTA (recovers ~6+ weeks of SEO aging before licensure); the quote path and InsuranceAgency schema flip at license. Founder review budget: ≤2 hr/wk (agents draft, founder approves — counts inside the 8 hr/wk marketing cap).
 
@@ -28,7 +28,7 @@
 
 - Every airframe page links: scoring explainer → waitlist; sibling airframe pages; (post-license) the quote page.
 - Authority strategy is the GTM strategy: type-club forum reputation and the newsletter drive branded search and direct traffic; guides earn organic links from forum citations (never self-spam links — see `gtm/type-club-channel-guide.md` etiquette rules).
-- Local: (post-license) Google Business Profile for [BRAND] at KBDR-area address, category Insurance Agency, service area CT — [VERIFY GBP policy for service-area insurance businesses at setup].
+- Local: (post-license) Google Business Profile for Penfield Aviation Insurance at KBDR-area address, category Insurance Agency, service area CT — [VERIFY GBP policy for service-area insurance businesses at setup].
 
 ## Cadence (inside the 2 hr/wk founder-review budget)
 
